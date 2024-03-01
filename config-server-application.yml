@@ -1,0 +1,22 @@
+server:
+   port: 9004
+   
+spring:
+   application:
+      name: config-server
+   cloud:
+    config: 
+     server: 
+      git: 
+       uri: https://github.com/shahnawaz1711/config-server
+       searchPaths: configuration
+       
+eureka:
+  instance:
+    preferIpAddress: true
+    hostname: eureka-0
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://eureka-0.eureka.default.svc.cluster.local:8761/eureka

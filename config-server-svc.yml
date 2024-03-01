@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: config-server
+spec:
+   selector:
+      matchLabels: 
+         app: config-server
+   replicas: 1
+   template:
+      metadata:
+         labels:
+            app: config-server
+      spec:
+         containers:
+            - name: contact-service-container
+              image: shahnawaz786/config-server
+              imagePullPolicy: IfNotPresent
+              ports:
+                 - containerPort: 9004
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+   name: config-serversvc
+spec:
+   selector:
+      app: config-server
+   ports:
+      - port: 80
+        targetPort: 9004
+   type: ClusterIP
